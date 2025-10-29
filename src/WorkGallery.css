@@ -95,7 +95,7 @@ body {
 /* Scroll Arrows */
 .nav-icons {
   position: absolute;
-  top: 50%;
+  top: 25%;
   width: 100%;
   pointer-events: none;
 }

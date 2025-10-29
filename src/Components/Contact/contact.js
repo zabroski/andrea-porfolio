@@ -1,91 +1,86 @@
-import React from "react";
+import React, { useRef, useState } from "react";
+import emailjs from "emailjs-com";
 import { motion } from "framer-motion";
 import "./contact.css";
 
 const Contact = () => {
+  const form = useRef();
+  const [isSent, setIsSent] = useState(false);
+  const [error, setError] = useState("");
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+    setError("");
+    setIsSent(false);
+
+    emailjs
+      .sendForm(
+        "service_hdnia0q", // e.g. service_123abc
+        "template_7eva9cq", // e.g. template_contact
+        form.current,
+        "kYzVSX0Ra4Jpp0Kqi" // e.g. lXyzAbcDEFghIJKl
+      )
+      .then(
+        (result) => {
+          console.log("Message sent:", result.text);
+          setIsSent(true);
+          form.current.reset();
+        },
+        (error) => {
+          console.error("Error:", error.text);
+          setError("Failed to send message. Please try again later.");
+        }
+      );
+  };
+
   return (
     <div className="contact-container">
-      {/* HEADER */}
       <motion.section
         className="contact-header"
         initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        viewport={{ once: true }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
       >
         <h1>Get in Touch</h1>
         <p>
-          Have a question, collaboration idea, or just want to say hello? I’d
-          love to hear from you! Fill out the form below and I’ll get back to
-          you as soon as possible.
+          Have a question or project idea? Leave a message below and I’ll get
+          back to you soon!
         </p>
       </motion.section>
 
-      {/* CONTACT FORM */}
       <motion.section
         className="contact-form-section"
-        initial={{ opacity: 0, y: 50 }}
+        initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: "easeOut" }}
+        transition={{ duration: 1 }}
         viewport={{ once: true }}
       >
-        <form className="contact-form">
-          <motion.div
-            className="form-group"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 200 }}
-          >
-            <input type="text" name="name" required />
-            <label htmlFor="name">Your Name</label>
-          </motion.div>
+        <form ref={form} onSubmit={sendEmail} className="contact-form">
+          <div className="form-group">
+            <input type="text" name="user_name" required />
+            <label>Your Name</label>
+          </div>
 
-          <motion.div
-            className="form-group"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 200 }}
-          >
-            <input type="email" name="email" required />
-            <label htmlFor="email">Email Address</label>
-          </motion.div>
+          <div className="form-group">
+            <input type="email" name="user_email" required />
+            <label>Email Address</label>
+          </div>
 
-          <motion.div
-            className="form-group"
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 200 }}
-          >
+          <div className="form-group">
             <textarea name="message" rows="5" required></textarea>
-            <label htmlFor="message">Message</label>
-          </motion.div>
+            <label>Message</label>
+          </div>
 
-          <motion.button
-            type="submit"
-            className="submit-btn"
-            whileHover={{
-              scale: 1.05,
-              boxShadow: "0 0 15px rgba(42, 42, 114, 0.4)",
-            }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ duration: 0.2 }}
-          >
+          <button type="submit" className="submit-btn">
             Send Message
-          </motion.button>
+          </button>
+
+          {isSent && (
+            <p className="success-text">✅ Message sent successfully!</p>
+          )}
+          {error && <p className="error-text">❌ {error}</p>}
         </form>
       </motion.section>
-
-      {/* FOOTER */}
-      <motion.footer
-        className="contact-footer"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1.2 }}
-        viewport={{ once: true }}
-      >
-        <p>&copy; 2025 Andrea. All rights reserved.</p>
-        <div className="footer-links">
-          <a href="#">Privacy Policy</a>
-          <a href="#">Terms of Service</a>
-        </div>
-      </motion.footer>
     </div>
   );
 };

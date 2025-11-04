@@ -1,51 +1,20 @@
-// import React from "react";
-// import { NavLink } from "react-router-dom";
-// // import styles from './Header.module.css';
-
-// // import Jump from "../../assets/jump.PNG";
-// import "./header.css";
-
-// const Header = () => {
-//   return (
-//     <header className="header">
-//       <div className="container">
-//         <div className="logoWrapper">
-//           {/* <img src={Jump} alt='logo' className="logo" /> */}
-//           <span className="brandName">Andrea</span>
-//         </div>
-//         <nav className="nav">
-//           <NavLink
-//             to="/"
-//             className={({ isActive }) => `navLink${isActive ? " active" : ""}`}
-//           >
-//             About
-//           </NavLink>
-//           <NavLink
-//             to="/work"
-//             className={({ isActive }) => `navLink${isActive ? " active" : ""}`}
-//           >
-//             Work
-//           </NavLink>
-//           <NavLink
-//             to="/contact"
-//             className={({ isActive }) => `navLink${isActive ? " active" : ""}`}
-//           >
-//             Contact
-//           </NavLink>
-//         </nav>
-//       </div>
-//     </header>
-//   );
-// };
-
-// export default Header;
-
 import React, { useState, useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import "./header.css";
 
-const Header = () => {
+const Header = ({ toggleDarkMode, darkMode }) => {
+  <header className="header">
+    <h1 className="brandName">
+      <Link to="/" className="brandLink">
+        Andrea Palumbos
+      </Link>
+    </h1>
+
+    <button onClick={toggleDarkMode} className="theme-toggle">
+      {darkMode ? "☀️ Light" : "🌙 Dark"}
+    </button>
+  </header>;
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -79,7 +48,7 @@ const Header = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <span className="brandName">Andrea</span>
+          <span className="brandName">Andrea Palumbos</span>
         </motion.div>
 
         {/* Desktop Nav */}

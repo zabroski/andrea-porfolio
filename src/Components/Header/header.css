@@ -44,16 +44,16 @@
 .nav {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.8rem;
   transition: all 0.4s ease;
 }
 
 .navLink {
   position: relative;
   text-decoration: none;
-  color: #333;
+  color: #2a2a72;
   font-weight: 500;
-  font-size: 1rem;
+  font-size: 1.4rem;
   transition: color 0.3s ease;
 }
 
@@ -88,6 +88,9 @@
   width: 25px;
   height: 20px;
   justify-content: space-between;
+}
+.theme-toggle {
+  font-size: 300px;
 }
 
 .menu-toggle span {
@@ -125,6 +128,8 @@
 .mobile-nav .navLink {
   font-size: 1.2rem;
 }
+
+
 
 /* RESPONSIVE STYLES */
 @media (max-width: 768px) {

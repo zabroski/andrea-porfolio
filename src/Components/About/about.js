@@ -11,7 +11,7 @@ const About = () => {
           <img src={image} alt="Andrea" className="about-image" />
         </div>
         <div className="about-text">
-          <h1 className="about-title">Meet Andrea</h1>
+          {/* <h1 className="about-title">Meet Andrea Palumbos</h1> */}
           <p className="about-description">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim

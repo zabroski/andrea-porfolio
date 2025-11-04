@@ -1,6 +1,6 @@
 .contact-container {
   font-family: "Poppins", sans-serif;
-  background: linear-gradient(135deg, #e2e6ff, #f0f4ff);
+  /* background: linear-gradient(135deg, #e2e6ff, #f0f4ff); */
   color: #333;
   min-height: 100vh;
   display: flex;
